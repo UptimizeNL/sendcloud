@@ -469,7 +469,7 @@ class Client
                 'name' => $shippingAddress->getName(),
                 'company_name' => $shippingAddress->getCompanyName() ?? '',
                 'address' => $shippingAddress->getStreet(),
-                'house_number' => $shippingAddress->getHouseNumber(),
+//                'house_number' => $shippingAddress->getHouseNumber(),
                 'city' => $shippingAddress->getCity(),
                 'postal_code' => $shippingAddress->getPostalCode(),
                 'country' => $shippingAddress->getCountryCode(),
