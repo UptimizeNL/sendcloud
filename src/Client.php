@@ -466,8 +466,8 @@ class Client
 
         if ($shippingAddress) {
             $parcelData = array_merge($parcelData, [
-                'name' => $shippingAddress->getName(),
-                'company_name' => $shippingAddress->getCompanyName() ?? '',
+                'name' => mb_strimwidth($shippingAddress->getName(),0,30,'...'),
+                'company_name' => mb_strimwidth($shippingAddress->getCompanyName() ?? '',0,30,'...'),
                 'address' => $shippingAddress->getStreet(),
 //                'house_number' => $shippingAddress->getHouseNumber(),
                 'city' => $shippingAddress->getCity(),
