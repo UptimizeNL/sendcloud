@@ -42,7 +42,8 @@ class Client
         string $secretKey,
         ?string $partnerId = null,
         ?string $apiBaseUrl = null
-    ) {
+    )
+    {
         $this->publicKey = $publicKey;
         $this->secretKey = $secretKey;
         $this->partnerId = $partnerId;
@@ -146,7 +147,8 @@ class Client
         ?string $customsInvoiceNumber = null,
         ?int $customsShipmentType = null,
         ?array $items = null
-    ): Parcel {
+    ): Parcel
+    {
         $parcelData = $this->getParcelData(
             null,
             $shippingAddress,
@@ -457,7 +459,8 @@ class Client
         ?string $customsInvoiceNumber,
         ?int $customsShipmentType,
         ?array $items
-    ): array {
+    ): array
+    {
         $parcelData = [];
 
         if ($parcelId) {
@@ -466,16 +469,20 @@ class Client
 
         if ($shippingAddress) {
             $parcelData = array_merge($parcelData, [
-                'name' => mb_strimwidth($shippingAddress->getName(),0,30,'...'),
-                'company_name' => mb_strimwidth($shippingAddress->getCompanyName() ?? '',0,30,'...'),
+                'name' => mb_strimwidth($shippingAddress->getName(), 0, 30, '...'),
+                'company_name' => mb_strimwidth($shippingAddress->getCompanyName() ?? '', 0, 30, '...'),
                 'address' => $shippingAddress->getStreet(),
-//                'house_number' => $shippingAddress->getHouseNumber(),
+                'house_number' => $shippingAddress->getHouseNumber(),
                 'city' => $shippingAddress->getCity(),
                 'postal_code' => $shippingAddress->getPostalCode(),
                 'country' => $shippingAddress->getCountryCode(),
                 'email' => $shippingAddress->getEmailAddress(),
                 'telephone' => $shippingAddress->getPhoneNumber() ?? '',
             ]);
+
+            if (empty($parcelData['house_number']) || $parcelData['house_number'] == "0") {
+                unset($parcelData['house_number']);
+            }
         }
 
         if ($servicePointId) {
@@ -580,7 +587,8 @@ class Client
     protected function parseRequestException(
         RequestException $exception,
         string $defaultMessage
-    ): SendCloudRequestException {
+    ): SendCloudRequestException
+    {
         $message = $defaultMessage;
         $code = SendCloudRequestException::CODE_UNKNOWN;
 
